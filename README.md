@@ -1,5 +1,5 @@
 # ATM-Simulator
-A JavaFX ATM Banking Simulator developed for CI453 - WOrking in the Computing Industry at the University of Brighton.
+A JavaFX ATM Banking Simulator developed for CI453 - Working in the Computing Industry at the University of Brighton.
 
 ## Architecture
 MVC + Domain - View, Controller, UIModel, Bank, BankAccount, SQLite
