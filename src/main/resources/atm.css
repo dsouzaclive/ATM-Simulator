@@ -1,0 +1,113 @@
+#Layout {
+    -fx-grid-lines-visible: false;
+    -fx-hgap: 5;
+    -fx-vgap: 5;
+    -fx-padding: 10;
+}
+
+#Buttons {
+    -fx-pref-columns: 6;
+    -fx-pref-tile-width: 75;
+    -fx-hgap: 5;
+    -fx-vgap: 5;
+}
+
+.button {
+    -fx-font: bold 16pt "courier new";
+    -fx-background-color: #2E86AB;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #74a6bd;
+    -fx-border-width: 2px;
+    -fx-border-color: orange;
+    -fx-border-style: solid;
+    -fx-border-radius: 2px;
+}
+
+#menu_button {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 9px;
+    -fx-border-radius: 9px;
+}
+
+#button_numpad {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Courier New";
+
+    -fx-background-color: #2E86AB;
+    -fx-text-fill: white;
+
+    -fx-cursor: hand;
+
+    -fx-min-width: 65px;
+    -fx-min-height: 73px;
+
+    -fx-background-radius: 6px;
+    -fx-border-radius: 6px;
+}
+
+#button_numpad:hover {
+    -fx-background-color: #74a6bd;
+    -fx-border-width: 2px;
+    -fx-border-color: orange;
+    -fx-border-style: solid;
+    -fx-border-radius: 2px;
+}
+
+#button_save {
+    -fx-font-size: 15px;
+}
+
+.label {
+    -fx-font: bold 14pt "Courier New";  /* font size and weight */
+    -fx-text-fill: orange;            /* text color */
+}
+
+#label_heading {
+    -fx-font-size: 25px;
+}
+
+.text-field {
+    -fx-font: bold 14pt "Courier New"; /* or any font size you want */
+}
+
+.text-area {
+    -fx-font: bold 14pt "Courier New"; /* or any font size you want */
+}
+
+#top {
+    -fx-background-color: #1A3C5E;
+}
+
+#left {
+    -fx-background-color: #1A3C5E;
+}
+
+#center {
+    -fx-background-color: #d3e5fd;
+}
+
+#right {
+    -fx-background-color: #1A3C5E;
+}
+
+#bottom {
+    -fx-background-color: #1A3C5E;
+}
+
+#separater {
+    -fx-background-color: #000000;
+}
+
+#button_expand {
+    -fx-background-color: #ffffff;
+}
+
+#pane {
+    -fx-background-color: #ffffff;
+}
