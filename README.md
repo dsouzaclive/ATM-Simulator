@@ -11,11 +11,13 @@ MVC + Domain - View, Controller, UIModel, Bank, BankAccount, SQLite
 - Transaction History
 - Account Settings (Change PIN, Plan, Withdrawal Limit)
 - SQLite database persistence via JDBC
+- User Accessibility features
 
 ## Tech Stack
 - Java 21
 - JavaFX 21
 - SQLite (via Xerial JDBC driver)
+- JUnit 5 
 - IntelliJ IDEA
 
 ## Authors
