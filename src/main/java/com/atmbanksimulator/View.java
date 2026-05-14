@@ -346,8 +346,7 @@ class View {
 
         for(Button b : buttons){
             b.setPrefSize(250, 110);
-            b.setId("menu_button");
-            b.setOnAction(this::buttonClicked);
+            b.setStyle("-fx-font-size: 30px; -fx-font-weight: bold");
         }
 
         int col = 0;
