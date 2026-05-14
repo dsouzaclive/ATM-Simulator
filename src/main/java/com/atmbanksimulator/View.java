@@ -31,7 +31,7 @@ import java.util.Objects;
  * @author D'Souza, C. J.
  * @version 3.0
  */
-class View {
+public class View {
     int H = 750;
     int W = 1300;
 
@@ -346,7 +346,8 @@ class View {
 
         for(Button b : buttons){
             b.setPrefSize(250, 110);
-            b.setStyle("-fx-font-size: 30px; -fx-font-weight: bold");
+            b.setId("menu_button");
+            b.setOnAction(this::buttonClicked);
         }
 
         int col = 0;
@@ -383,7 +384,7 @@ class View {
 
         for(Button b : buttons){
             b.setPrefSize(250, 110);
-            b.setId("menu_button");
+            b.setStyle("-fx-font-size: 30px; -fx-font-weight: bold");
         }
 
         int col = 0;

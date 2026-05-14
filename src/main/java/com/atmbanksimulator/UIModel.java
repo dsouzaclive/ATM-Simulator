@@ -157,7 +157,12 @@ public class UIModel {
             case STATE_ACCOUNT_NO:
                 if(numberPadInput.isEmpty()){
                     numberPadInput = "";
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Enter a Valid Account Number");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Oops! An error occurred.");
+                    alert.setHeaderText("No Account Number detected!");
+                    alert.setContentText("Enter a Valid Account Number that exists in the bank's database.");
+                    alert.setResizable(true);
+                    alert.setHeight(500);
                     alert.show();
                     reset(title, message);
                 }
@@ -170,7 +175,12 @@ public class UIModel {
                 }
                 else{
                     numberPadInput = "";
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Account Not Found - please enter a valid account number");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Oops! An error occurred.");
+                    alert.setHeaderText("Invalid Account Number detected!");
+                    alert.setContentText("Enter a Valid Account Number that exists in the bank's database.");
+                    alert.setResizable(true);
+                    alert.setHeight(500);
                     alert.show();
                     reset(title, message);
                 }
@@ -189,16 +199,24 @@ public class UIModel {
                 } else {
                     failedLoginAttempts++;
                     if (failedLoginAttempts >= maxLogInAttempts) {
-                        Alert alert = new Alert(Alert.AlertType.ERROR,
-                                "Your account has been locked due to " + maxLogInAttempts + " failed login attempts. Please contact your bank.");
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Account has been locked.");
+                        alert.setHeaderText("Your account has been locked due to " + maxLogInAttempts + " failed login attempts.");
+                        alert.setContentText("Please contact your bank.");
+                        alert.setResizable(true);
+                        alert.setHeight(500);
                         alert.show();
                         failedLoginAttempts = 0;
                         accPinInput = "";
                         reset("INPUT ACCOUNT NUMBER", "Enter the Account Number:");
                     } else {
                         int remaining = maxLogInAttempts - failedLoginAttempts;
-                        Alert alert = new Alert(Alert.AlertType.ERROR,
-                                "Invalid PIN. " + remaining + " attempt(s) remaining.");
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Oops! An error occurred.");
+                        alert.setHeaderText("Invalid PIN. " + remaining + " attempt(s) remaining.");
+                        alert.setContentText("Retry again!");
+                        alert.setResizable(true);
+                        alert.setHeight(500);
                         alert.show();
                     }
                 }
@@ -208,14 +226,24 @@ public class UIModel {
                 float amount_deposit = parseValidAmount(numberPadInput);
                 if(amount_deposit>0){
                     bank.deposit(amount_deposit);
-                    Alert alert_deposit = new Alert(Alert.AlertType.INFORMATION, "An amount of £" + numberPadInput + " was successfully deposited into your account.\nAccount Balance: £" + bank.getBalance());
+                    Alert alert_deposit = new Alert(Alert.AlertType.INFORMATION);
                     setState(STATE_LOGGED_IN);
                     title = "WELCOME, " + bank.getName(accNumber);
                     message = "";
                     boxStatus = state;
+                    alert_deposit.setTitle("Transaction Successful!");
+                    alert_deposit.setHeaderText("An amount of £" + numberPadInput + " was successfully deposited into your account.\nAccount Balance: £" + bank.getBalance());
+                    alert_deposit.setContentText("Thank you for using our services!");
+                    alert_deposit.setResizable(true);
+                    alert_deposit.setHeight(500);
                     alert_deposit.show();
                 }else{
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid Amount");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Oops! An error occurred.");
+                    alert.setHeaderText("Invalid Amount detected!");
+                    alert.setContentText("Enter a valid amount.");
+                    alert.setResizable(true);
+                    alert.setHeight(500);
                     alert.show();
                 }
                 numberPadInput="";
@@ -226,23 +254,43 @@ public class UIModel {
                 float limit_custom = bank.getWithdrawalLimit(accNumber);
                 if(amount_withdraw > 0) {
                     if(amount_withdraw> limit_custom){
-                        Alert alert = new Alert(Alert.AlertType.ERROR, "Withdrawal Amount exceeds the one-time withdrawal limit of £" + limit_custom);
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Oops! An error occurred.");
+                        alert.setHeaderText("Withdrawal Amount exceeds the one-time withdrawal limit of £" + limit_custom);
+                        alert.setContentText("Enter a valid amount.");
+                        alert.setResizable(true);
+                        alert.setHeight(500);
                         alert.show();
                     } else{
                         if (bank.withdraw(amount_withdraw)) {
-                            Alert alert_withdraw = new Alert(Alert.AlertType.INFORMATION, "An amount of £" + numberPadInput + " was successfully withdrawn from your account.\nAccount Balance: £" + bank.getBalance());
+                            Alert alert_withdraw = new Alert(Alert.AlertType.INFORMATION);
+                            alert_withdraw.setTitle("Transaction Successful!");
+                            alert_withdraw.setHeaderText("An amount of £" + numberPadInput + " was successfully withdrawn from your account.\nAccount Balance: £" + bank.getBalance());
+                            alert_withdraw.setContentText("Thank you for using our services!");
+                            alert_withdraw.setResizable(true);
+                            alert_withdraw.setHeight(500);
                             alert_withdraw.show();
                             setState(STATE_LOGGED_IN);
                             title = "WELCOME, " + bank.getName(accNumber);
                             message = "";
                             boxStatus = state;
                         } else {
-                            Alert alert = new Alert(Alert.AlertType.ERROR, "Withdrawal Forfeited due to:\n1. Exceeded the Account Balance of £"+bank.getBalance()+"\n2. Withdrawal fails to maintain a minimum balance of £20");
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("Oops! An error occurred.");
+                            alert.setHeaderText("Withdrawal Forfeited due to:\n1. Exceeded the Account Balance of £"+bank.getBalance()+"\n2. Withdrawal fails to maintain a minimum balance of £20");
+                            alert.setContentText("Enter a valid amount.");
+                            alert.setResizable(true);
+                            alert.setHeight(500);
                             alert.show();
                         }
                     }
                 } else{
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid Amount");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Oops! An error occurred.");
+                    alert.setHeaderText("Invalid Amount detected!");
+                    alert.setContentText("Enter a valid amount.");
+                    alert.setResizable(true);
+                    alert.setHeight(500);
                     alert.show();
                 }
                 numberPadInput="";
@@ -258,10 +306,20 @@ public class UIModel {
 
             case STATE_TRANSFER_ACCOUNT_NO:
                 if(numberPadInput.isEmpty()){
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Enter a Valid Account Number");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Oops! An error occurred.");
+                    alert.setHeaderText("No Account Number detected!");
+                    alert.setContentText("Enter a Valid Account Number that exists in the bank's database.");
+                    alert.setResizable(true);
+                    alert.setHeight(500);
                     alert.show();
                 }else if(numberPadInput.equals(accNumber)){
                     Alert alert = new Alert(Alert.AlertType.ERROR, "You cannot transfer money to yourself.");
+                    alert.setTitle("Oops! An error occurred.");
+                    alert.setHeaderText("You cannot transfer money to yourself!");
+                    alert.setContentText("Enter a Valid Account Number that exists in the bank's database.");
+                    alert.setResizable(true);
+                    alert.setHeight(500);
                     alert.show();
                 }else if(bank.login_AccountExist(numberPadInput)){
                     accNumber_Transfer = numberPadInput;
@@ -269,7 +327,12 @@ public class UIModel {
                     title = "TRANSFER SERVICES";
                     message = "Enter the amount to be transferred:";
                 }else{
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Account Not Found - please enter a valid account number");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Oops! An error occurred.");
+                    alert.setHeaderText("Invalid Account Number detected!");
+                    alert.setContentText("Enter a Valid Account Number that exists in the bank's database.");
+                    alert.setResizable(true);
+                    alert.setHeight(500);
                     alert.show();
                 }
                 numberPadInput = "";
@@ -278,25 +341,45 @@ public class UIModel {
             case STATE_TRANSFER_AMOUNT:
                 float amount_transfer = parseValidAmount(numberPadInput);
                 if(amount_transfer > 0) {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "An amount of £"+numberPadInput+" will be transferred to Account Number: "+accNumber_Transfer);
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Transfer Confirmation Required.");
+                    alert.setHeaderText("An amount of £"+numberPadInput+" will be transferred to Account Number: "+accNumber_Transfer);
+                    alert.setContentText("Click 'OK' to continue.");
+                    alert.setResizable(true);
+                    alert.setHeight(500);
                     Optional<ButtonType> buttonType = alert.showAndWait();
                     if (buttonType.isPresent() && buttonType.get().equals(ButtonType.OK)) {
                         if (bank.withdraw_transferred(accNumber_Transfer, amount_transfer)) {
                             bank.deposit_transferred(accNumber_Transfer, amount_transfer);
-                            Alert alert_withdraw = new Alert(Alert.AlertType.INFORMATION, "An amount of £" + numberPadInput + " was successfully withdrawn from your account and transferred to Account Number:" + accNumber_Transfer +".\nAccount Balance: £" + bank.getBalance());
+                            Alert alert_withdraw = new Alert(Alert.AlertType.INFORMATION);
+                            alert_withdraw.setTitle("Transaction Successful!");
+                            alert_withdraw.setHeaderText("An amount of £" + numberPadInput + " was successfully withdrawn from your account and transferred to Account Number:" + accNumber_Transfer +".\nAccount Balance: £" + bank.getBalance());
+                            alert_withdraw.setContentText("Thank you for using our services!");
+                            alert_withdraw.setResizable(true);
+                            alert_withdraw.setHeight(500);
                             alert_withdraw.show();
                             setState(STATE_LOGGED_IN);
                             title = "WELCOME, " + bank.getName(accNumber);
                             message = "";
                             boxStatus = state;
                         } else {
-                            Alert alert1 = new Alert(Alert.AlertType.ERROR, "Insufficient Funds");
+                            Alert alert1 = new Alert(Alert.AlertType.ERROR);
+                            alert1.setTitle("Oops! An error occurred.");
+                            alert1.setHeaderText("Insufficient Funds");
+                            alert1.setContentText("Enter a valid amount.");
+                            alert1.setResizable(true);
+                            alert1.setHeight(500);
                             alert1.show();
                         }
                     }
 
                 } else{
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid Amount");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Oops! An error occurred.");
+                    alert.setHeaderText("Invalid Amount detected!");
+                    alert.setContentText("Enter a valid amount.");
+                    alert.setResizable(true);
+                    alert.setHeight(500);
                     alert.show();
                 }
                 numberPadInput="";
@@ -309,7 +392,12 @@ public class UIModel {
                     message = "Enter the NEW pin/password:";
                     boxStatus = state;
                 }else{
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid PIN/Password");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Oops! An error occurred.");
+                    alert.setHeaderText("Invalid PIN/Password detected!");
+                    alert.setContentText("Enter the PIN used to log into the current logged in account.");
+                    alert.setResizable(true);
+                    alert.setHeight(500);
                     alert.show();
                 }
                 numberPadInput="";
@@ -317,7 +405,12 @@ public class UIModel {
 
             case STATE_SETTINGS_CHANGE_NEW_PASSWORD:
                 if(numberPadInput.length()==4){
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Your PIN will change after you click OK");
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Confirmation Required.");
+                    alert.setHeaderText("Your PIN will be changed.");
+                    alert.setContentText("Click 'OK' to continue.");
+                    alert.setResizable(true);
+                    alert.setHeight(500);
                     Optional<ButtonType> buttonType = alert.showAndWait();
                     if (buttonType.isPresent() && buttonType.get().equals(ButtonType.OK)) {
                         bank.updatePin(accNumber, numberPadInput);
@@ -327,7 +420,12 @@ public class UIModel {
                         boxStatus = state;
                     }
                 }else{
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "The PIN must be of 4 digits");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Oops! An error occurred.");
+                    alert.setHeaderText("The PIN must be of 4 digits");
+                    alert.setContentText("Enter a valid new PIN.");
+                    alert.setResizable(true);
+                    alert.setHeight(500);
                     alert.show();
                 }
                 numberPadInput="";
@@ -345,7 +443,12 @@ public class UIModel {
                     case "StudentPrime": limit = 600; break;
                 }
                 if(amount>=50 && amount<=limit) {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Your one-time withdrawal limit will be set to £"+amount);
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Confirmation Required.");
+                    alert.setHeaderText("Your one-time withdrawal limit will be set to £"+amount);
+                    alert.setContentText("Click 'OK' to continue.");
+                    alert.setResizable(true);
+                    alert.setHeight(500);
                     Optional<ButtonType> buttonType = alert.showAndWait();
                     if (buttonType.isPresent() && buttonType.get().equals(ButtonType.OK)) {
                         bank.updateWithdrawalLimit(accNumber, amount);
@@ -355,7 +458,12 @@ public class UIModel {
                         boxStatus = state;
                     }
                 }else{
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "The account limit can be set from £50.0 - £" + limit);
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Oops! An error occurred.");
+                    alert.setHeaderText("The account limit can be set from £50.0 - £" + limit);
+                    alert.setContentText("Enter a valid withdrawal limit.");
+                    alert.setResizable(true);
+                    alert.setHeight(500);
                     alert.show();
                 }
                 numberPadInput="";
@@ -389,7 +497,12 @@ public class UIModel {
             boxStatus = state;
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "You aren't Logged In");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Oops! An error occurred.");
+            alert.setHeaderText("You aren't Logged In");
+            alert.setContentText("Please log in to use our services!");
+            alert.setResizable(true);
+            alert.setHeight(500);
             alert.show();
             reset(title, message);
         }
@@ -405,7 +518,11 @@ public class UIModel {
             boxStatus = state;
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "You aren't Logged In");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("You aren't Logged In");
+            alert.setContentText("Please log in to use our services!");
+            alert.setResizable(true);
+            alert.setHeight(500);
             alert.show();
             reset(title, message);
         }
@@ -421,7 +538,11 @@ public class UIModel {
             boxStatus = state;
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "You aren't Logged In");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("You aren't Logged In");
+            alert.setContentText("Please log in to use our services!");
+            alert.setResizable(true);
+            alert.setHeight(500);
             alert.show();
             reset(title, message);
         }
@@ -442,7 +563,11 @@ public class UIModel {
             }
 
         } else{
-            Alert alert = new Alert(Alert.AlertType.ERROR, "You aren't Logged In");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("You aren't Logged In");
+            alert.setContentText("Please log in to use our services!");
+            alert.setResizable(true);
+            alert.setHeight(500);
             alert.show();
             reset(title, message);
         }
@@ -459,7 +584,11 @@ public class UIModel {
             history = bank.getTransactionHistory(accNumber);
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "You aren't Logged In");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("You aren't Logged In");
+            alert.setContentText("Please log in to use our services!");
+            alert.setResizable(true);
+            alert.setHeight(500);
             alert.show();
             reset(title, message);
         }
@@ -475,7 +604,11 @@ public class UIModel {
             boxStatus = state;
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "You aren't Logged In");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("You aren't Logged In");
+            alert.setContentText("Please log in to use our services!");
+            alert.setResizable(true);
+            alert.setHeight(500);
             alert.show();
             reset(title, message);
         }
